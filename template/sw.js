@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ttkhe'
+let CACHE_NAME = 'ttkhe'
 const cacheFile = [
   "./",
   "./index.html",
@@ -13,10 +13,9 @@ const cacheFile = [
   "./css/skel.css",
   "./css/style.css",
   "./css/style-xlarge.css",
-  "./css/font-awsome.min.css"
+  "./css/font-awesome.min.css",
   // 有用到font再放進cache
   "./images/bokeh_car_lights_bg.jpg",  
-  "./images/LOGO位置_示意圖.png",  
   "./images/pic_sec_001.jpg",
   "./images/dark_tint.png",            
   "./images/pic02.jpg",            
@@ -35,9 +34,9 @@ const cacheFile = [
   "./images/record.png",
   "./images/interation.png",        
   "./images/pic07.jpg", 
-  "./images/內頁第二頁.jpg",
   "./images/LOGO.png",  
-] 
+]
+ 
 
 //install(when user first open our website)
 self.addEventListener('install', event => {
@@ -45,7 +44,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
     .then(cache => cache.addAll(cacheFile))
-    .then(() => self.skipWaiting())
+    //.then(() => self.skipWaiting())
   )
 })
 
@@ -54,8 +53,8 @@ self.addEventListener('activate', event => {
   console.log(`activate ${CACHE_NAME}, now ready to handle fetches`)
   //clear old cache  
   event.waitUntil(
-    caches.keys().then(cacheNAmes => {
-      return Priomise.all(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
         cacheNames.map(item => {
           if (item !== CACHE_NAME) {
             return caches.delete(item)

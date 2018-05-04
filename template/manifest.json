@@ -1,0 +1,12 @@
+{
+  "name": "find ttkhe",
+  "short_name": "ttkhe",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [{
+    "src": "./image/LOGO.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}
