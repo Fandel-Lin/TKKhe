@@ -1,7 +1,9 @@
-const app = require('express')()
-const http = require('https')
+const express = require('express')
+const fs = require('fs')
+const https = require('https')
 
-const config = require('connfig.json')
+const config = require('./config.json')
+const app = express()
 
 const options = {
   ca: fs.readFileSync(config.ssl.ca),
@@ -9,10 +11,10 @@ const options = {
   cert: fs.readFileSync(config.ssl.cert)
   }
 
-app.use(express.static(__dirname + '/template')
+app.use(express.static(__dirname + '/template'))
 
 
-app.get('/data', (req, res) {
+app.get('./data', (req, res) => {
   res.send()
 })
 
