@@ -11,7 +11,7 @@ const options = {
   cert: fs.readFileSync(config.ssl.cert)
 }
 
-app.use(express.static(__dirname + '/template'))
+app.use(express.static(__dirname + '/public'))
 
 
 app.get('/data', (req, res) => {
