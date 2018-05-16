@@ -8,7 +8,6 @@ const cacheFile = [
   "./js/skel.min.js",
   //html5shiv.js is for ie8 but ie8 ... 
   "./js/skel-layers.min.js",
-  "./js/app.js",
   "./css/skel.css",
   "./css/style.css",
   "./css/style-xlarge.css",
