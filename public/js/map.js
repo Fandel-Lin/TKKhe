@@ -1,7 +1,8 @@
 let historicalOverlay;
 let map
-let marker
+let user_position
 let pos
+let attractions
 
 function CenterControl(controlDiv, map){
 
@@ -51,12 +52,14 @@ function initMap () {
   
   centerControlDiv.index = 1
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv)
-
-  marker = new google.maps.Marker({
+  
+  //user position
+  user_position = new google.maps.Marker({
     position: {lat: 22.99721, lng: 120.211818},
     map: map
   })
 
+  //old map
   let imageBounds = {
     north: 23.00242,
     south: 22.98685,
@@ -69,24 +72,41 @@ function initMap () {
     imageBounds);
   historicalOverlay.setMap(map)
 
+  //set attractions
+  let iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  let icons = {
+    parking: iconBase + 'parking_lot_maps.png'
+  }
+
+  attractions = [
+    {
+      name: 'Tainan station',
+      position: {lat: 22.99721, lng: 120.211818},
+      type: 'parking'
+    }
+  ]
+  //create attractions
+  attractions.forEach((attraction) =>  {
+    var marker = new google.maps.Marker({
+      position: attraction.position,
+      icon: icons[attraction.type],
+      map: map
+    })
+  })
+
+           
+  //geolocation
   getGeolocation.then(pos => {
+    console.log(pos.lat)
     map.setCenter(pos)
-    marker.setPosition(pos)
+    user_position.setPosition(pos)
   }).catch(msg => {
     console.log(msg)
   })
+  
 
 }
 
-setInterval(() => {
-  
-  getGeolocation.then(pos => {
-    marker.setPosition(pos)
-  }).catch(msg => {
-    console.log(msg)
-  })
-  
-}, 10000)
 
 
 let getGeolocation = new Promise((resolve, reject) => {
@@ -102,3 +122,31 @@ let getGeolocation = new Promise((resolve, reject) => {
     })
   }  
 })
+
+//find nearest attraction
+// TODO fix it ^^(with Promise.all)
+let nearestAttr = () => {
+  let nearestDis = Number.MAX_SAFE_INTEGER
+  let nearest
+  for(attr in attractions){
+      if(distanceTo(attr) < nearestDis){
+        nearestDis = distanceTo(attr)
+        nearest = attr
+      }
+  }
+  return nearest
+}
+// TODO let it be promise or await
+let distanceTo = attr => {
+  getGeolocation
+  .then(user => {
+    let powDelLat = Math.pow(attr.lat - user.lat)
+    let powDelLng = Math.pow(attr.lng - user.lng)
+    return Math.aqrt(powDelLat+powDelLmg)
+  }).catch(msg => {
+    console.log(msg)
+    return 0
+  })
+}
+
+console.log(nearestAttr())
