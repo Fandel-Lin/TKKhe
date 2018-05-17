@@ -6,27 +6,27 @@ let pos
 function CenterControl(controlDiv, map){
 
   //Set CSS for the control border.
-  var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#fff';
-  controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '100px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.margin = '6px';
-  controlUI.style.textAlign = 'center';
-  controlUI.title = 'Click to recenter the map';
-  controlDiv.appendChild(controlUI);
+  var controlUI = document.createElement('div')
+  controlUI.style.backgroundColor = '#fff'
+  controlUI.style.border = '2px solid #fff'
+  controlUI.style.borderRadius = '100px'
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
+  controlUI.style.cursor = 'pointer'
+  controlUI.style.margin = '6px'
+  controlUI.style.textAlign = 'center'
+  controlUI.title = 'Click to recenter the map'
+  controlDiv.appendChild(controlUI)
 
   // Set CSS for the control interior.
-  var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '30px';
-  controlText.style.paddingLeft = '13px';
-  controlText.style.paddingRight = '13px';
-  controlText.innerHTML = '!';
-  controlUI.appendChild(controlText);
+  var controlText = document.createElement('div')
+  controlText.style.color = 'rgb(25,25,25)'
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
+  controlText.style.fontSize = '36px'
+  controlText.style.lineHeight = '54px'
+  controlText.style.paddingLeft = '6px'
+  controlText.style.paddingRight = '4px'
+  controlText.innerHTML = '<i class="crosshairs icon"></i>'
+  controlUI.appendChild(controlText)
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', () => {
@@ -41,6 +41,9 @@ function initMap () {
     zoom: 18,
     center: {lat: 22.99721, lng: 120.211818},
     streetViewControl: false,
+    mapTypeControl: false,
+    zoomControl: false,
+    fullscreenControl: false
   })
 
   var centerControlDiv = document.createElement('div')
