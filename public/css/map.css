@@ -3,21 +3,21 @@
 #map {
   height: 92vh;
 }
-#info{
+#bar{
   height: 8vh;
   background-color: Sienna;
   font-size: 25px;
   padding:14px;
 }
-#info  p{
+#bar  p{
   display: inline-block;
   color: #fff;
 }
-#info  div{
+#bar  div{
   display: inline-block;
   height: 33.5px;
 }
-#info  .icon{
+#bar  .icon{
   display: inline-block;
   color: #fff;
 }

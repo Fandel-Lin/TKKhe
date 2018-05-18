@@ -1,22 +1,24 @@
-let historicalOverlay;
+let historicalOverlay
+let userPositionIcon
 let map
-let user_position
-let pos
 let attractions = [{
     name: '台南火車站',
     position: {lat: 22.99721, lng: 120.211818},
     type: 'parking',
-    distance: Number.MAX_SAFE_INTEGER  
+    distance: Number.MAX_SAFE_INTEGER, 
+    content: 'aaa,'
   },{
     name: '成大電機系',
     position: {lat: 22.996891, lng: 120.222337},
     type: 'parking',
-    distance: Number.MAX_SAFE_INTEGER  
+    distance: Number.MAX_SAFE_INTEGER,  
+    content: 'aaa,'
   },{
     name: '赤崁樓',
     position: {lat: 22.997470, lng: 120.202749},
     type: 'parking',
-    distance: Number.MAX_SAFE_INTEGER  
+    distance: Number.MAX_SAFE_INTEGER,
+    content: 'aaa,'
   }
 
 ]
@@ -48,7 +50,11 @@ function CenterControl(controlDiv, map){
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', () => {
-    map.setCenter(pos);
+    getGeolocation().then( pos =>{
+      map.setCenter(pos)
+      userPositionIcon.setPosition(pos)
+      setAttr(pos)
+    })
   })
 
 }
@@ -70,8 +76,9 @@ function initMap () {
   centerControlDiv.index = 1
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv)
   
+  
   //user position
-  user_position = new google.maps.Marker({
+  userPositionIcon = new google.maps.Marker({
     position: {lat: 22.99721, lng: 120.211818},
     map: map
   })
@@ -97,44 +104,54 @@ function initMap () {
 
   //create attractions
   attractions.forEach((attraction) =>  {
+    var infowindow = new google.maps.InfoWindow({
+      content: attraction.content
+    })
+
     var marker = new google.maps.Marker({
       position: attraction.position,
       icon: icons[attraction.type],
-      map: map
+      map: map,
+      title: attraction.content
+    })
+    
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
     })
   })
 
-           
   //geolocation
-  getGeolocation.then(pos => {
-    map.setCenter(pos)
-    user_position.setPosition(pos)
-  }).catch(msg => {
-    console.log(msg)
-  })
+  if (!navigator.geolocation) {
+    consol.log('Geolocation is not supported by your browser')
+  }else{
+    getGeolocation().then(pos => {
+      map.setCenter(pos)
+      userPositionIcon.setPosition(pos)
+      setAttr(pos)
+    }).catch(msg => {
+      console.log(msg)
+    })
+  }  
   
 
 }
 
-
-
-let getGeolocation = new Promise((resolve, reject) => {
-  if (!navigator.geolocation) {
-    reject('Geolocation is not supported by your browser')
-  }else{
-    navigator.geolocation.getCurrentPosition((position) => {
+let getGeolocation = () => {
+  return new Promise((resolve) =>{
+    navigator.geolocation.getCurrentPosition((position)=>{
       pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
       resolve(pos)
+
     })
-  }  
-})
+  })
+}
 
 //find nearest attraction
 
-/* usage: getGeolocation
+/* usage: getGeolocation()
 ** .then(user => updateDistance(user))
 ** .then(msg => console.log(msg))
 **
@@ -152,26 +169,27 @@ let updateDistance = user => {
   )
 }
 
-let nearestAttr = new Promise((resolve) =>{
-  getGeolocation
-  .then(user => updateDistance(user))
-  .then(() => {
-    let attrArr = attractions.map(attr =>{
+let nearestAttr = (user) =>{ 
+  return new Promise((resolve) =>{
+    updateDistance(user).then(() => {
+      let attrArr = attractions.map(attr =>{
         return Promise.resolve(attr.distance)
-    })
-
-    Promise.all(attrArr).then(distances => {
-      attractions.forEach(attr => {
-        if (attr.distance == Math.min(...distances)){
-          console.log(attr)
-          resolve(attr)  
-        }
       })
-    })
-  })  
-})
 
-nearestAttr.then(attr=>{
-  $('#nearestAttraction').html('<i class="flag icon"></i><p>'+attr.name+'</p>')
-})
+      Promise.all(attrArr).then(distances => {
+        attractions.forEach(attr => {
+          if (attr.distance == Math.min(...distances)){
+            resolve(attr)  
+          }
+        })
+      })
+    })  
+  })
+}
+
+let setAttr = (user) => {
+  nearestAttr(user).then(attr=>{
+    $('#nearestAttraction').html('<i class="flag icon"></i><p>'+attr.name+'</p>')
+  })
+}
 
