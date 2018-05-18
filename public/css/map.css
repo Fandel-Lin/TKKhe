@@ -9,12 +9,18 @@
   font-size: 25px;
   padding:14px;
 }
-#info  div{
+#info  p{
   display: inline-block;
-}
-#info  .icon{
   color: #fff;
 }
-#attraction{
+#info  div{
+  display: inline-block;
+  height: 33.5px;
+}
+#info  .icon{
+  display: inline-block;
+  color: #fff;
+}
+#nearestAttraction{
   width:224px
 }

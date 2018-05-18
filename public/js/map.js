@@ -2,7 +2,24 @@ let historicalOverlay;
 let map
 let user_position
 let pos
-let attractions
+let attractions = [{
+    name: '台南火車站',
+    position: {lat: 22.99721, lng: 120.211818},
+    type: 'parking',
+    distance: Number.MAX_SAFE_INTEGER  
+  },{
+    name: '成大電機系',
+    position: {lat: 22.996891, lng: 120.222337},
+    type: 'parking',
+    distance: Number.MAX_SAFE_INTEGER  
+  },{
+    name: '赤崁樓',
+    position: {lat: 22.997470, lng: 120.202749},
+    type: 'parking',
+    distance: Number.MAX_SAFE_INTEGER  
+  }
+
+]
 
 function CenterControl(controlDiv, map){
 
@@ -78,13 +95,6 @@ function initMap () {
     parking: iconBase + 'parking_lot_maps.png'
   }
 
-  attractions = [
-    {
-      name: 'Tainan station',
-      position: {lat: 22.99721, lng: 120.211818},
-      type: 'parking'
-    }
-  ]
   //create attractions
   attractions.forEach((attraction) =>  {
     var marker = new google.maps.Marker({
@@ -97,7 +107,6 @@ function initMap () {
            
   //geolocation
   getGeolocation.then(pos => {
-    console.log(pos.lat)
     map.setCenter(pos)
     user_position.setPosition(pos)
   }).catch(msg => {
@@ -124,29 +133,45 @@ let getGeolocation = new Promise((resolve, reject) => {
 })
 
 //find nearest attraction
-// TODO fix it ^^(with Promise.all)
-let nearestAttr = () => {
-  let nearestDis = Number.MAX_SAFE_INTEGER
-  let nearest
-  for(attr in attractions){
-      if(distanceTo(attr) < nearestDis){
-        nearestDis = distanceTo(attr)
-        nearest = attr
-      }
-  }
-  return nearest
-}
-// TODO let it be promise or await
-let distanceTo = attr => {
-  getGeolocation
-  .then(user => {
-    let powDelLat = Math.pow(attr.lat - user.lat)
-    let powDelLng = Math.pow(attr.lng - user.lng)
-    return Math.aqrt(powDelLat+powDelLmg)
-  }).catch(msg => {
-    console.log(msg)
-    return 0
-  })
+
+/* usage: getGeolocation
+** .then(user => updateDistance(user))
+** .then(msg => console.log(msg))
+**
+** ["update", "update"................]
+*/
+
+let updateDistance = user => {
+  return Promise.all(
+    attractions.map(attr => {
+      let delLat = attr.position.lat - user.lat
+      let delLng = attr.position.lng - user.lng
+      attr.distance = Math.sqrt(delLat*delLat + delLng*delLng)
+      return Promise.resolve('updated')
+    })
+  )
 }
 
-console.log(nearestAttr())
+let nearestAttr = new Promise((resolve) =>{
+  getGeolocation
+  .then(user => updateDistance(user))
+  .then(() => {
+    let attrArr = attractions.map(attr =>{
+        return Promise.resolve(attr.distance)
+    })
+
+    Promise.all(attrArr).then(distances => {
+      attractions.forEach(attr => {
+        if (attr.distance == Math.min(...distances)){
+          console.log(attr)
+          resolve(attr)  
+        }
+      })
+    })
+  })  
+})
+
+nearestAttr.then(attr=>{
+  $('#nearestAttraction').html('<i class="flag icon"></i><p>'+attr.name+'</p>')
+})
+
