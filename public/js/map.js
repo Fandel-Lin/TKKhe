@@ -1,6 +1,7 @@
 let historicalOverlay
 let userPositionIcon
 let map
+let nearestAttraction
 let attractions = [{
     name: '台南火車站',
     position: {lat: 22.99721, lng: 120.211818},
@@ -118,12 +119,11 @@ function initMap () {
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     })
+    
   })
 
   //geolocation
-  if (!navigator.geolocation) {
-    consol.log('Geolocation is not supported by your browser')
-  }else{
+  if (navigator.geolocation) {
     getGeolocation().then(pos => {
       map.setCenter(pos)
       userPositionIcon.setPosition(pos)
@@ -131,8 +131,9 @@ function initMap () {
     }).catch(msg => {
       console.log(msg)
     })
-  }  
-  
+  } else{
+    consol.log('Geolocation is not supported by your browser')
+  }
 
 }
 
@@ -157,6 +158,7 @@ let getGeolocation = () => {
 **
 ** ["update", "update"................]
 */
+
 
 let updateDistance = user => {
   return Promise.all(
@@ -190,6 +192,25 @@ let nearestAttr = (user) =>{
 let setAttr = (user) => {
   nearestAttr(user).then(attr=>{
     $('#nearestAttraction').html('<i class="flag icon"></i><p>'+attr.name+'</p>')
+    nearestAttraction = attr
   })
 }
+$(document).ready(() => {
 
+  $('#nearestAttraction').click(()=>{
+    map.setCenter(nearestAttraction.position) 
+  })
+  
+  $('.edit').click(() => {
+    console.log('aaa')
+    $('#experience').show()
+    if($('#experience').css('display') == 'none'){
+      $('#experience').show()
+    }else{
+      $('#experience').hide()
+    }
+
+
+  })
+
+})
