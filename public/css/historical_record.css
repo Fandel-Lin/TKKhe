@@ -1,0 +1,84 @@
+/*historical record*/
+
+    .historical_table{
+        left: 7%;
+        background-color: white;
+        border-radius: 15px;
+        
+    }
+    
+    .historical_font_color{
+        color: #A37B51;
+    }
+
+    #historical_image{
+        position: absolute;
+        top: 18%;
+        height: 35%;
+        left: 7%;
+        width: 86%;
+        background-color: gray;
+        display:inline;
+        
+        border-radius: 15px;
+       
+    }
+
+    #historical_image_icon{
+        position: absolute;
+        top: 45%;
+        left: 33%;
+        width: 30%;
+        height: 30%;
+        font-size:20vw;
+    }
+
+    #historical_table_section{
+        padding-top: 60%;
+        
+    }
+    
+    
+
+    .wrapper.historical_main{
+        padding-top: 3%;
+    }
+
+    .historical_location_name{
+        font-size: 5vw;
+    }
+
+    .historical_heart{
+        width: 13%;
+        text-align: center;
+        font-size: 5vw;
+        vertical-align: middle;
+        padding-top: 5vw;
+    }
+
+    .historical_flag{
+        width: 10%;
+        text-align: center;
+        font-size: 5vw;
+        vertical-align: middle;
+        padding-top: 5vw;
+     }
+    
+    #historical_image_bar{
+        position: absolute;
+        left: 85%;
+        top: 54%;
+        font-size: 5vw;
+    }
+
+    .previos_page{
+        position: absolute;
+        left:2vw ;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 5vw;
+        padding-top: 2vw;
+    }
+    
+    
+/*///////////////////////////*/
