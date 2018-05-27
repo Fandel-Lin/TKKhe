@@ -186,7 +186,7 @@
 		transform: translate3d(0,0,0);
 	/* Set your background with this */
 
-		background: #ece4cf url("images/pic04.png") bottom left;
+		background: #DCC395 url("images/pic04.png") bottom left;
 		background-repeat: repeat-x;
 		height: 100%;
 		left: 0;
@@ -1039,3 +1039,50 @@
 		#header nav {
 			padding: 0 1em;
 		} }
+
+
+
+
+/*0527*/
+
+    #logo001{
+        position: absolute;
+        width: 35%;
+        height: 20%;
+        top: 10%;
+        left:32.5%;
+        background-image: url(images/LOGO.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        
+        
+    }
+    
+    #logo002{
+        position: absolute;
+        width: 60%;
+        height: 15%;
+        top: 30%;
+        left:20%;
+        background-image: url(images/LOGO02.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        
+        
+    }
+
+    #start{
+        position: absolute;
+        width: 40%;
+        height: 15%;
+        top: 50%;
+        left:30%;
+        background-image: url(images/START.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        
+        
+    }
+
+
+/*//////////////*/
