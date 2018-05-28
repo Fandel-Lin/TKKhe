@@ -19,5 +19,11 @@ app.get('/data', (req, res) => {
   res.send("hi this is a response")
 })
 
+
+
+app.get("/experience", (req, res) =>  {
+  res.send(req.query.experience)
+})
+
 https.createServer(options, app)
 .listen(config.port, () => console.log(`listen on port:${config.port}`))

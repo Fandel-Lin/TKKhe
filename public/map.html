@@ -23,34 +23,43 @@
 	</head>
 
 	<body class="landing">
-    
     <!-- Header -->
-			<header id="header">
-				
-				<nav id="nav">
-					<ul>
-            <li><a href="about_us.html">About us</a></li>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="map.html">Map</a></li>
-            <li><a href="function.html">Function</a></li>
-						<li><a href="touch.html">Touch</a></li>
-						<li><a href="#" class="button special">Sign Up</a></li>
-					</ul>
-				</nav>
-      </header>
+		<header id="header">
+      <nav id="nav">
+        <ul>
+          <li><a href="about_us.html">About us</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="map.html">Map</a></li>
+          <li><a href="function.html">Function</a></li>
+          <li><a href="touch.html">Touch</a></li>
+          <li><a href="#" class="button special">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <section>
-        <div id="map"></div>
-        <div id='bar'>
-          <div id='nearestAttraction'></div>
-          <div id='right'>
-            <i class="camera icon"></i>
-            <i class="heart icon"></i>
-            <i class="edit icon"></i>
-            <i class="share icon"></i>
-          </div>
+    <section>
+      <div id="map"></div>
+      
+      <div id='experience'>
+        <div class='bar'>
+          <div id='exp-title'></div>
+          <i class="times icon"></i>
         </div>
-      </section>  
+        <textarea rows="6" placeholder='寫下你的心得吧'></textarea>
+        <div class ='custButton dark'><p>發佈</p></div>
+        <div class ='custButton light'><p>取消</p></div>
+      </div>
+
+      <div class='bar'>
+        <div id='nearestAttraction'></div>
+        <div id='right'>
+          <i class="camera icon"></i>
+          <i class="heart icon"></i>
+          <i class="edit icon"></i>
+          <i class="share icon"></i>
+        </div>
+      </div>
+    </section>  
 
     <script src="js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgDbn_mp0OT7VYG6XaaxaTPX2GgraqLtQ&callback=initMap" async defer></script>

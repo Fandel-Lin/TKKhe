@@ -192,6 +192,7 @@ let nearestAttr = (user) =>{
 let setAttr = (user) => {
   nearestAttr(user).then(attr=>{
     $('#nearestAttraction').html('<i class="flag icon"></i><p>'+attr.name+'</p>')
+    $('#exp-title').html('<i class="edit icon"></i><p>'+attr.name+'</p>')
     nearestAttraction = attr
   })
 }
@@ -202,15 +203,30 @@ $(document).ready(() => {
   })
   
   $('.edit').click(() => {
-    console.log('aaa')
-    $('#experience').show()
     if($('#experience').css('display') == 'none'){
       $('#experience').show()
     }else{
       $('#experience').hide()
     }
-
-
   })
+  
+  $('#experience .times').click(() => $('#experience').hide())
+
+  $(".custButton.light").click(() => $('#experience').hide())
+    
+  $(".custButton.dark").click(function(){
+    event.preventDefault();//取消reload
+
+    $.ajax({
+      method: "get",
+      url: "./experience",
+      data: {
+        experience: $("#experience textarea").val(),
+      },
+      success: function(data) {
+        console.log(data)  
+      }
+    })
+  })  
 
 })

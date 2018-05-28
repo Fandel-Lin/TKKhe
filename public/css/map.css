@@ -3,24 +3,83 @@
 #map {
   height: 92vh;
 }
-#bar{
+.bar{
   height: 8vh;
   background-color: Sienna;
   font-size: 25px;
   padding:14px;
 }
-#bar  p{
+.bar  p{
   display: inline-block;
   color: #fff;
 }
-#bar  div{
+.bar  div{
   display: inline-block;
   height: 33.5px;
 }
-#bar  .icon{
+.bar  .icon{
   display: inline-block;
   color: #fff;
 }
 #nearestAttraction{
   width:224px
 }
+#experience{
+  position: absolute;
+  display: none;
+  top: 20vh;
+  left: calc(50% - 45vw);
+  width: 90vw;
+  height: 50vh;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px groove;
+  overflow: hidden;
+  box-shadow: 2px 4px #ddd;
+}
+#experience .times{
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 1rem;
+}
+#experience textarea{
+  margin: auto;
+  margin-top: 2rem;
+  border: 1px groove;
+  width: 80vw;
+}
+.custButton{
+  margin-top: 1rem;
+  padding: auto;
+  height: 2.5rem;
+  width: 5rem;
+  display: inline-block;
+  border-radius: 6px;
+}
+.dark{
+  background-color: #663300;
+  color: white;
+}
+.dark:active{
+  background-color: #331a00;
+}
+.light{
+  background-color: #ebe3ce;
+  color: #663300;
+}
+.light:active{
+  background-color: #d3c092;
+}
+.custButton.dark{
+  margin-left: 11rem;
+}
+.custButton p{
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
+
+
+
+
