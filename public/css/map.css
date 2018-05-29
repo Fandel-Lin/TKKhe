@@ -49,6 +49,11 @@
   border: 1px groove;
   width: 80vw;
 }
+#exp-content > p{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 5rem;
+}
 .custButton{
   margin-top: 1rem;
   padding: auto;

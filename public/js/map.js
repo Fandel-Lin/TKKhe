@@ -277,7 +277,7 @@ $(document).ready(() => {
   $('#nearestAttraction').click(()=>{
     map.setCenter(nearestAttraction.position) 
   })
-  
+
   $('.edit').click(() => {
     if($('#experience').css('display') == 'none'){
       $('#experience').show()
@@ -285,13 +285,15 @@ $(document).ready(() => {
       $('#experience').hide()
     }
   })
-  
+
   $('#experience .times').click(() => $('#experience').hide())
 
   $(".custButton.light").click(() => $('#experience').hide())
-    
-  $(".custButton.dark").click(function(){
+
+  $(".custButton.dark").click(() => {
     event.preventDefault();//取消reload
+    $('#exp-content').html('<p>收到嘍～</p>')
+
 
     $.ajax({
       method: "get",
