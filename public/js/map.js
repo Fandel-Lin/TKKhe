@@ -7,7 +7,7 @@ let attractions = [{
     position: {lat: 22.994491, lng: 120.215901},
     type: 'monuments',
     distance: Number.MAX_SAFE_INTEGER, 
-    content: '歷史背景：西元1922年臺灣總督府發布「臺灣教育令」，配合「日臺共學」，成立「臺南州臺南第二中學校」，有別於「一中」、「一女」為名的中學招收日人或權貴為主要目的，第二中學提供臺灣本地人就讀，原為五年制教育，但因西元1943年太平洋戰爭爆發，縮短休業年限，改為四年制教育。二戰後，國民政府接收臺灣教育，將校名從「臺南州立臺南第二中學校」改為「臺灣省立臺南第一中學」，為「三三制」完全中學。原臺南州第二中學校舍本館際講堂，作為日本人就讀的「小學校」校舍，及州立二中時期興建的禮堂，被指定為市定古蹟，為今日之小禮堂。除市定古蹟外，校內尚有臺灣府城城垣的殘跡。 地址： 臺南市東區民族路一段1號 創立年代：西元1922年'
+    html: '<p>歷史背景：西元1922年臺灣總督府發布「臺灣教育令」，配合「日臺共學」，成立「臺南州臺南第二中學校」，有別於「一中」、「一女」為名的中學招收日人或權貴為主要目的，第二中學提供臺灣本地人就讀，原為五年制教育，但因西元1943年太平洋戰爭爆發，縮短休業年限，改為四年制教育。二戰後，國民政府接收臺灣教育，將校名從「臺南州立臺南第二中學校」改為「臺灣省立臺南第一中學」，為「三三制」完全中學。原臺南州第二中學校舍本館際講堂，作為日本人就讀的「小學校」校舍，及州立二中時期興建的禮堂，被指定為市定古蹟，為今日之小禮堂。除市定古蹟外，校內尚有臺灣府城城垣的殘跡。 地址： 臺南市東區民族路一段1號 創立年代：西元1922年<p>'
   },{
     name: '臺南廳長官邸 ',
     position: {lat: 22.993790, lng: 120.214946},
@@ -70,7 +70,11 @@ let attractions = [{
     content: '歷史背景: 於清乾隆7年（西元1742年），由臺灣知縣楊允璽、臺灣鎮標左營游擊林夢熊和粵東商民集資興建，於德慶溪旁。主祭為三山國王，左右祠分別為媽祖與韓文公，曾有多次整修，於嘉慶7年(西元1802年)於廟後方設置會館(因此又稱潮汕會館)，以供來往台灣與中國大陸的潮州人休息居住，也是潮州人的聚會場所；而到日治時期(西元1899年)，總督府於此設置「台南師範學校」，後擴編改制成「台灣總督府國語學校設立台南分校」，並遷到赤崁樓，後廟產曾遭盜賣，韓文公祠與媽祖祠曾變成肥料倉庫，民國以後，廟產因收歸國有，缺乏管理，到五十三年（西元1964年）申請宗教團體登記後，才由臺南市潮汕同鄉會管理，後來有多次整修政府亦有出資。 特色: 建材自潮州運來，並為潮州匠師所興建，因此屬潮州式風格，為台灣唯一純粹廣東式建築，各祠皆有他的前殿、正殿及院落，與臺灣廟宇常見之閩南式建築有許多差異，如:內部有許多大小天井，有通風及採光的功能，廟牆以磚疊砌，再塗以白灰，無牆堵裝飾；屋頂平直僅兩端稍微上翹，不像閩南式的大幅度翹起，且屋頂使用黑瓦，有別於閩南式使用的紅瓦，垂脊為貼陶及花草飾物，造型樸質。正殿中的花瓶形月門，綠漆描邊，配以泥飾花卉枝葉，是一大特色。殿內存有清匾、鐘爐、旗杆等古物及碑記，其中「褒忠匾」為清乾隆所賜，相當珍貴。整體設計樸實，目前為二級古蹟。活動: 慶元宵，賽水仙 : 元宵時，會放煙火及水仙花展，並演奏潮州之樂、劇，以答謝神明，在日治時期因九一八事變被禁止，民國後漸恢復。 地址: 台南市北區西門路三段100號 創立年代:西元1742年'
   }
 ]
-function TutorControl(controlDiv, map){
+
+// !TODO: create own attraction Info
+//function attractionInfo(){}
+
+function MapControl(controlDiv, map, title, icon, func){
 
   //Set CSS for the control border.
   var controlUI = document.createElement('div')
@@ -81,7 +85,7 @@ function TutorControl(controlDiv, map){
   controlUI.style.cursor = 'pointer'
   controlUI.style.margin = '9px'
   controlUI.style.textAlign = 'center'
-  controlUI.title = 'Click to start tutorial'
+  controlUI.title = title
   controlDiv.appendChild(controlUI)
 
   // Set CSS for the control interior.
@@ -93,86 +97,15 @@ function TutorControl(controlDiv, map){
   controlText.style.lineHeight = '45px'
   controlText.style.paddingLeft = '10px'
   controlText.style.paddingRight = '4px'
-  controlText.innerHTML = '<i class="volume up icon"></i>'
+  controlText.innerHTML = '<i class=' + icon +'></i>'
   controlUI.appendChild(controlText)
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', () => {
-    console.log('aaa')
+    func()
   })
 
 }
-
-function MapControl(controlDiv, map){
-
-  //Set CSS for the control border.
-  var controlUI = document.createElement('div')
-  controlUI.style.backgroundColor = '#fff'
-  controlUI.style.border = '2px solid #fff'
-  controlUI.style.borderRadius = '100px'
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
-  controlUI.style.cursor = 'pointer'
-  controlUI.style.margin = '9px'
-  controlUI.style.textAlign = 'center'
-  controlUI.title = 'Click to swtich the map'
-  controlDiv.appendChild(controlUI)
-
-  // Set CSS for the control interior.
-  var controlText = document.createElement('div')
-  controlText.style.color = 'rgb(25,25,25)'
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
-  controlText.style.color = '#663300'
-  controlText.style.fontSize = '25px'
-  controlText.style.lineHeight = '45px'
-  controlText.style.paddingLeft = '10px'
-  controlText.style.paddingRight = '4px'
-  controlText.innerHTML = '<i class="map icon"></i>'
-  controlUI.appendChild(controlText)
-
-  // Setup the click event listeners: simply set the map to Chicago.
-  controlUI.addEventListener('click', () => {
-    console.log('aaa')
-  })
-
-}
-
-function CenterControl(controlDiv, map){
-
-  //Set CSS for the control border.
-  var controlUI = document.createElement('div')
-  controlUI.style.backgroundColor = '#fff'
-  controlUI.style.border = '2px solid #fff'
-  controlUI.style.borderRadius = '100px'
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
-  controlUI.style.cursor = 'pointer'
-  controlUI.style.margin = '9px'
-  controlUI.style.textAlign = 'center'
-  controlUI.title = 'Click to recenter the map'
-  controlDiv.appendChild(controlUI)
-
-  // Set CSS for the control interior.
-  var controlText = document.createElement('div')
-  controlText.style.color = 'rgb(25,25,25)'
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
-  controlText.style.color = '#663300'
-  controlText.style.fontSize = '25px'
-  controlText.style.lineHeight = '45px'
-  controlText.style.paddingLeft = '10px'
-  controlText.style.paddingRight = '4px'
-  controlText.innerHTML = '<i class="crosshairs icon"></i>'
-  controlUI.appendChild(controlText)
-
-  // Setup the click event listeners: simply set the map to Chicago.
-  controlUI.addEventListener('click', () => {
-    getGeolocation().then( pos =>{
-      map.setCenter(pos)
-      userPositionIcon.setPosition(pos)
-      setAttr(pos)
-    })
-  })
-
-}
-
 // initial map
 function initMap () {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -185,19 +118,37 @@ function initMap () {
   })
 
   var tutorControlDiv = document.createElement('div')
-  var mapControlDiv = document.createElement('div')
+  var overLayControlDiv = document.createElement('div')
   var centerControlDiv = document.createElement('div')
- 
-  var tutuorControl = new TutorControl(tutorControlDiv, map)
-  var mapControl = new MapControl(mapControlDiv, map)
-  var centerControl = new CenterControl(centerControlDiv, map)
+
+  let tutorTitle = 'Click to start tutorial'
+  let overLayTitle = 'Click to swtich the map'
+  let centerTitle =  'Click to recenter the map'
+
+  let tutorIcon = '"volume up icon"'
+  let overLayIcon = '"map icon"'
+  let centerIcon = '"crosshairs icon"'
+
+  let tutorFunc = () => console.log('aaa')
+  let overLayFunc = () => console.log('aaa')
+  let centerFunc = () => {
+    getGeolocation().then( pos =>{
+      map.setCenter(pos)
+      userPositionIcon.setPosition(pos)
+      setAttr(pos)
+    })
+  }
+
+  var tutuorControl = new MapControl(tutorControlDiv, map, tutorTitle, tutorIcon, tutorFunc)
+  var overLayControl = new MapControl(overLayControlDiv, map, overLayTitle, overLayIcon, overLayFunc)
+  var centerControl = new MapControl(centerControlDiv, map, centerTitle, centerIcon, centerFunc)
   
   tutorControlDiv.index = 1
-  mapControlDiv.index = 2
+  overLayControlDiv.index = 2
   centerControlDiv.index = 3
   
   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(tutorControlDiv)
-  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(mapControlDiv)
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(overLayControlDiv)
   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv)
   
   
@@ -221,27 +172,28 @@ function initMap () {
   historicalOverlay.setMap(map)
 
   //set attractions
-  // let iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   let icons = {
-    //parking: iconBase + 'parking_lot_maps.png'
     monuments: '../images/bank.png'
   }
 
   //create attractions
   attractions.forEach((attraction) =>  {
-    var infowindow = new google.maps.InfoWindow({
-      content: attraction.content
-    })
-
     var marker = new google.maps.Marker({
       position: attraction.position,
       icon: icons[attraction.type],
       map: map,
       title: attraction.name
     })
-    
+
+    // !TODO: create own attraction Info
+    var infowindow = new google.maps.InfoWindow({
+      content: attraction.content
+    })
+
+
     marker.addListener('click', function() {
-      infowindow.open(map, marker);
+    // !TODO: create own attraction Info
+       infowindow.open(map, marker);
     })
     
   })
