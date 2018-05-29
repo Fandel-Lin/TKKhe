@@ -26,30 +26,34 @@
 
 				<nav id="nav">
 					<ul>
-            <li><a href="about_us.html">About us</a></li>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="map.html">Map</a></li>
-            <li><a href="function.html">Function</a></li>
-						<li><a href="touch.html">Touch</a></li>
-						<li><a class="button special" id="Sign_Up">Sign Up</a></li>
+						<li><a href="function.html">Function</a></li>
+						<li><a href="about_us.html">About us</a></li>
+						<li><a href="touch.html">Contact</a></li>
 					</ul>
 				</nav>
 			</header>
 
 		<!-- Banner -->
+		<div id="fb-root"></div>
 			<section id="banner">
-				<h2 class="plane1">發 現 德 慶 溪</h2>
-				<br>
-				<div class="plane1" style="width: 80%; margin: 0 auto;">
-					<ul class="actions vertical">
-						<li><a href="#map.html" class="button icon fa-child">自由行</a></li>
+				<div class="plane1">
+					<h2 style="color:#A37B51;">發 現 德 慶 溪</h2>
+					<p style="color:#A37B51;">
 						<br>
-						<li><a href="#tour_guide.html" class="button icon fa-search">尋找導覽員</a></li>
+						德慶溪，一條你可能從未聽說過、<br>
 						<br>
-						<li><a href="#" class="button icon fa-expand">掃QR碼</a></li>
+						彷彿連臺南市地圖也集體失憶的溪流。<br>
 						<br>
-						<li><a href="#historical_record.html" class="button icon fa-book">歷史紀錄</a></li>
-					</ul>
+						曾流過赤嵌社梅花鹿飲水的悠閒、<br>
+						<br>
+						普羅民遮城汲水士兵的清涼<br>
+						<br>
+						和國姓爺攻臺的意氣風發……
+					</p>
+					<ul class="actions">
+	 					<li><a class="button" id="Sign_Up">開 始 探 索</a></li>
+	 				</ul>
 				</div>
 
 				<img class="plane2" src="images/LOGO2.png" alt="LOGO" style="width:45%; display:none;">
@@ -64,16 +68,30 @@
 								<a class="icon rounded fa-facebook" id="FB_login"><span class="label">Facebook</span></a>
 							</li>
 							<li>
-								<a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
+								<a class="icon rounded fa-twitter" id="Twitter_login"><span class="label">Twitter</span></a>
 							</li>
 							<li>
-								<a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
+								<a class="icon rounded fa-google-plus" id="Google_login"><span class="label">Google+</span></a>
 							</li>
 							<li>
-								<a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
+								<a class="icon rounded fa-linkedin" id="LinkedIn_login"><span class="label">LinkedIn</span></a>
 							</li>
 						</ul>
 					</div>
+				</div>
+
+				<div class="plane3" style="width: 80%; margin: 0 auto; display:none;">
+					<h2 style="color:#A37B51;">發 現 德 慶 溪</h2>
+					<br>
+					<ul class="actions vertical">
+						<li><a href="map.html" class="button icon fa-child">自由行</a></li>
+						<br>
+						<li><a href="tour_guide.html" class="button icon fa-search">尋找導覽員</a></li>
+						<br>
+						<li><a href="#" class="button icon fa-expand">掃QR碼</a></li>
+						<br>
+						<li><a href="historical_record.html" class="button icon fa-book">歷史紀錄</a></li>
+					</ul>
 				</div>
 			</section>
       <!--script src="js/app.js"></script-->
@@ -90,6 +108,7 @@
 			});
 
 			// Facebook SDK setup
+			var user_id, user_name, accessToken;
 			window.fbAsyncInit = function() {
 	      FB.init({
 	        appId            : '193212224643038',
@@ -97,25 +116,45 @@
 	        xfbml            : true,
 	        version          : 'v3.0'
 	      });
-	    };
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // Login and connect to app
+                user_id = response.authResponse.userID;
+                accessToken = response.authResponse.accessToken;
+								$(".plane1").hide();
+	 						  $(".plane2").hide();
+	 						  $(".plane3").show();
+
+            } else if (response.status === 'not_authorized') {
+                // Login but not connect
+
+            } else {
+                // Not login
+
+            }
+        });
+			}
 
 			// Facebook login
-			var user_id, user_name, user_mail;
 			$("#FB_login").click(function(){
 				FB.login(function(response){
 					if (response.authResponse) {
 			     console.log('Welcome!  Fetching your information.... ');
 			     FB.api('/me', function(response) {
 			       console.log('Good to see you, ' + response.name + '.');
+						 $(".plane1").hide();
+						 $(".plane2").hide();
+						 $(".plane3").show();
 						 user_id = response.id;
 						 user_name = response.name;
 						 user_mail = response.email;
 						 // Send user id to the server
 						 $.ajax({
-				       method: "get",
+				       method: "post",
 				       url: "/user_login",
 				       data: {
-				         user_id : response.id;
+				         user_id : response.id
 								 // get whatever you need
 				       },
 				       success: function() {
@@ -125,7 +164,9 @@
 			    } else {
 			     console.log('User cancelled login or did not fully authorize.');
 			    }
-				});
+				},{
+					 scope: 'email,user_about_me,user_likes,user_status'
+				 });
 			});
 
 			// Load the SDK asynchronously
