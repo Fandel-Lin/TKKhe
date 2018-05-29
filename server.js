@@ -5,8 +5,7 @@ const https = require('https')
 const config = require('./config.json')
 const app = express()
 
-const options = 
-{
+const options = {
   ca: fs.readFileSync(config.ssl.ca),
   key: fs.readFileSync(config.ssl.key),
   cert: fs.readFileSync(config.ssl.cert)

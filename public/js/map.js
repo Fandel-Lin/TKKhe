@@ -23,6 +23,71 @@ let attractions = [{
   }
 
 ]
+function TutorControl(controlDiv, map){
+
+  //Set CSS for the control border.
+  var controlUI = document.createElement('div')
+  controlUI.style.backgroundColor = '#fff'
+  controlUI.style.border = '2px solid #fff'
+  controlUI.style.borderRadius = '100px'
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
+  controlUI.style.cursor = 'pointer'
+  controlUI.style.margin = '9px'
+  controlUI.style.textAlign = 'center'
+  controlUI.title = 'Click to start tutorial'
+  controlDiv.appendChild(controlUI)
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div')
+  controlText.style.color = 'rgb(25,25,25)'
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
+  controlText.style.color = '#663300'
+  controlText.style.fontSize = '25px'
+  controlText.style.lineHeight = '45px'
+  controlText.style.paddingLeft = '10px'
+  controlText.style.paddingRight = '4px'
+  controlText.innerHTML = '<i class="volume up icon"></i>'
+  controlUI.appendChild(controlText)
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', () => {
+    console.log('aaa')
+  })
+
+}
+
+function MapControl(controlDiv, map){
+
+  //Set CSS for the control border.
+  var controlUI = document.createElement('div')
+  controlUI.style.backgroundColor = '#fff'
+  controlUI.style.border = '2px solid #fff'
+  controlUI.style.borderRadius = '100px'
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
+  controlUI.style.cursor = 'pointer'
+  controlUI.style.margin = '9px'
+  controlUI.style.textAlign = 'center'
+  controlUI.title = 'Click to swtich the map'
+  controlDiv.appendChild(controlUI)
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div')
+  controlText.style.color = 'rgb(25,25,25)'
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
+  controlText.style.color = '#663300'
+  controlText.style.fontSize = '25px'
+  controlText.style.lineHeight = '45px'
+  controlText.style.paddingLeft = '10px'
+  controlText.style.paddingRight = '4px'
+  controlText.innerHTML = '<i class="map icon"></i>'
+  controlUI.appendChild(controlText)
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', () => {
+    console.log('aaa')
+  })
+
+}
 
 function CenterControl(controlDiv, map){
 
@@ -33,7 +98,7 @@ function CenterControl(controlDiv, map){
   controlUI.style.borderRadius = '100px'
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)'
   controlUI.style.cursor = 'pointer'
-  controlUI.style.margin = '6px'
+  controlUI.style.margin = '9px'
   controlUI.style.textAlign = 'center'
   controlUI.title = 'Click to recenter the map'
   controlDiv.appendChild(controlUI)
@@ -42,9 +107,10 @@ function CenterControl(controlDiv, map){
   var controlText = document.createElement('div')
   controlText.style.color = 'rgb(25,25,25)'
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif'
-  controlText.style.fontSize = '36px'
-  controlText.style.lineHeight = '54px'
-  controlText.style.paddingLeft = '6px'
+  controlText.style.color = '#663300'
+  controlText.style.fontSize = '25px'
+  controlText.style.lineHeight = '45px'
+  controlText.style.paddingLeft = '10px'
   controlText.style.paddingRight = '4px'
   controlText.innerHTML = '<i class="crosshairs icon"></i>'
   controlUI.appendChild(controlText)
@@ -71,11 +137,21 @@ function initMap () {
     fullscreenControl: false
   })
 
+  var tutorControlDiv = document.createElement('div')
+  var mapControlDiv = document.createElement('div')
   var centerControlDiv = document.createElement('div')
+ 
+  var tutuorControl = new TutorControl(tutorControlDiv, map)
+  var mapControl = new MapControl(mapControlDiv, map)
   var centerControl = new CenterControl(centerControlDiv, map)
   
-  centerControlDiv.index = 1
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv)
+  tutorControlDiv.index = 1
+  mapControlDiv.index = 2
+  centerControlDiv.index = 3
+  
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(tutorControlDiv)
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(mapControlDiv)
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv)
   
   
   //user position
