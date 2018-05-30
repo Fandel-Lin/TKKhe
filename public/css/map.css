@@ -24,6 +24,38 @@
 #nearestAttraction{
   width:224px
 }
+#info{
+  position: absolute;
+  display: none;
+  top: 10vh;
+  left: calc(50% - 45vw);
+  width: 90vw;
+  height: 70vh;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px groove;
+  overflow: scroll;
+  box-shadow: 2px 4px #ddd;
+}
+#info>.bar{
+  height: 3vh;
+  padding:14px;
+  background-color: transparent;
+  color:#663300;
+  font-size: 20px;
+}
+#infoImg{
+  height: 30vh;
+  width: 80vw;
+  margin: auto;
+}
+#info h1{
+  margin-left: 2rem;
+  font-size: 2em;
+}
+#infoContent{
+  padding: 1rem;
+}
 #experience{
   position: absolute;
   display: none;
@@ -37,11 +69,13 @@
   overflow: hidden;
   box-shadow: 2px 4px #ddd;
 }
-#experience .times{
+.times{
   position: absolute;
   right: 0;
   top: 0;
-  margin: 1rem;
+}
+#experience .times{
+  margin: 1rem !important;
 }
 #experience textarea{
   margin: auto;
