@@ -812,7 +812,7 @@
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		.button:hover {
-			background-color: #51b6d9;
+			background-color: #A37B51;
 			text-decoration: none;
 		}
 
@@ -1019,7 +1019,7 @@
 
 		#header .container {
 			position: relative;
-          
+
 		}
 
 			#header .container h1 {
@@ -1085,12 +1085,12 @@
 				}
 
 		.wrapper.style2 .profiles {
-			
+
 			border-top: 1px solid rgba(144, 144, 144, 0.25);
 			margin-bottom: 4em;
 			padding-top: 4em;
             height: 200px;
-            
+
 		}
 
 		.wrapper.style2 .profile {

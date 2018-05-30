@@ -1,0 +1,23 @@
+.icon:before {
+  font-family: FontAwesome;
+}
+
+.plane3 {
+  width: 80%;
+  margin: 0 auto;
+  display:none;
+}
+
+#logo {
+  width: 45%;
+  display: none;
+}
+
+#login_page {
+  width: 90%;
+  height: 40%;
+  margin: 0 auto;
+  background-color: #A37B51;
+  border-radius: 20px;
+  display: none;
+}
