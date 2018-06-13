@@ -320,7 +320,7 @@ const inConstruction = () => {
     }
   }
 
-const hintAttraction () => {
+const hintAttraction = () => {
     
 }
 
