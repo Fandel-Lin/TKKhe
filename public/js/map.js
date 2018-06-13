@@ -241,6 +241,24 @@ function initMap () {
 }
 
 
+let getCamera = () => {
+  navigator.mediaDevices.getUserMedia({video: true})
+  .then(gotMedia)
+  .catch(error => console.error('getUserMedia() error:', error));
+}
+
+let gotMedia = (mediaStream) => {
+  const mediaStreamTrack = mediaStream.getVideoTracks()[0];
+  const imageCapture = new ImageCapture(mediaStreamTrack);
+  const img = document.querySelector('img');
+  
+  imageCapture.takePhoto()
+  .then(blob => {
+    img.src = URL.createObjectURL(blob);
+    img.onload = () => { URL.revokeObjectURL(this.src); }
+  })
+  .catch(error => console.error('takePhoto() error:', error))
+}
 
 let getGeolocation = () => {
   return new Promise((resolve) =>{
@@ -255,14 +273,6 @@ let getGeolocation = () => {
   })
 }
 
-//find nearest attraction
-
-/* usage: getGeolocation()
-** .then(user => updateDistance(user))
-** .then(msg => console.log(msg))
-**
-** ["update", "update"................]
-*/
 
 
 let updateDistance = user => {
@@ -301,12 +311,31 @@ let setAttr = (user) => {
     nearestAttraction = attr
   })
 }
+
+const inConstruction = () => {
+    if($('#camera').css('display') == 'none'){
+      $('#camera').show()
+    }else{
+      $('#camera').hide()
+    }
+  }
+
+const hintAttraction () => {
+    
+}
+
 $(document).ready(() => {
 
   $('#nearestAttraction').click(()=>{
     map.setCenter(nearestAttraction.position) 
+    hintAttraction()  
   })
 
+  $('.camera').click(inConstruction)
+  $('.heart').click(inConstruction)
+  $('.share').click(inConstruction)
+  $('#camera').click(inConstruction)
+  
   $('.edit').click(() => {
     if($('#experience').css('display') == 'none'){
       $('#experience').show()

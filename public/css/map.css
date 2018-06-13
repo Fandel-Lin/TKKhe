@@ -22,7 +22,7 @@
   color: #fff;
 }
 #nearestAttraction{
-  width:224px
+  width:220px
 }
 #info{
   position: absolute;
@@ -119,6 +119,20 @@
 }
 
 
-
-
-
+#camera{
+  position: absolute;
+  display: none;
+  top: 25vh;
+  left: calc(50% - 45vw);
+  width: 90vw;
+  height: 35vh;
+  border-radius: 10px;
+  border: 1px groove;
+  overflow: hidden;
+  box-shadow: 2px 4px #ddd;
+}
+#camera p{
+  font-size: 25px;
+  margin-top: 6rem;
+  text-align: center;
+}
