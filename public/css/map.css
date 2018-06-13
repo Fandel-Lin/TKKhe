@@ -21,9 +21,12 @@
   display: inline-block;
   color: #fff;
 }
-#nearestAttraction{
-  width:220px
+
+#right{
+  position: absolute;
+  right: 0.5rem;
 }
+
 #info{
   position: absolute;
   display: none;
