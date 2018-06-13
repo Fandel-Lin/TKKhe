@@ -2,10 +2,11 @@ let CACHE_NAME = 'ttkhe'
 const cacheFile = [
   "./",
   "./index.html",
-  "./js",
-  "./css",
-  // 有用到font再放進cache
-  "./images",  
+  "./css/index.css",
+  "css/skel.css",
+  "css/style.css",
+  "css/style-xlarge.css",
+  "./js/index.js",
 ]
  
 
