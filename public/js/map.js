@@ -11,7 +11,7 @@ let attractions = [{
     content: '歷史背景：西元1922年臺灣總督府發布「臺灣教育令」，配合「日臺共學」，成立「臺南州臺南第二中學校」，有別於「一中」、「一女」為名的中學招收日人或權貴為主要目的，第二中學提供臺灣本地人就讀，原為五年制教育，但因西元1943年太平洋戰爭爆發，縮短休業年限，改為四年制教育。二戰後，國民政府接收臺灣教育，將校名從「臺南州立臺南第二中學校」改為「臺灣省立臺南第一中學」，為「三三制」完全中學。原臺南州第二中學校舍本館際講堂，作為日本人就讀的「小學校」校舍，及州立二中時期興建的禮堂，被指定為市定古蹟，為今日之小禮堂。除市定古蹟外，校內尚有臺灣府城城垣的殘跡。 地址： 臺南市東區民族路一段1號 創立年代：西元1922',
     img: '"https://upload.wikimedia.org/wikipedia/commons/b/bd/P1060292_min.jpg"',
   },{
-    name: '臺南廳長官邸 ',
+    name: '臺南廳長官邸',
     position: {lat: 22.993790, lng: 120.214946},
     type: 'monuments',
     distance: Number.MAX_SAFE_INTEGER,  
@@ -170,10 +170,21 @@ function initMap () {
 
 
     marker.addListener('click', function() {
+      $.ajax({
+        method: "post",
+        url: "./get_comment",
+        data: {
+          attraction_name: attraction.name
+        },
+        success: function(content) {
+          console.log(content)  
+        }
+      })
       $('#infoTitle').html('<h1>'+attraction.name+'</h1>')
       $('#infoImg').css('background', 'url('+ attraction.img +') center center')
       $('#infoImg').css('background-size', 'cover')
       $('#infoContent').html('<p>'+attraction.content+'</p>')
+      //$('#infoContent').html('<p>'+attraction.content+'</p>')
       $('#info').show()
       //infowindow.open(map, marker);
     })
@@ -335,7 +346,6 @@ $(document).ready(() => {
       user_name  : localStorage.user_name
     },
     success: function(visited) {
-      console.log(visited)
       if(!visited){console.log('tutor')}
       //tutor()
     }
