@@ -1,3 +1,5 @@
+let localStorage = window.localStorage
+
 $('document').ready(function() {
   // Chenge planes
   $("#Sign_Up").click(function(){
@@ -19,15 +21,16 @@ $('document').ready(function() {
          $(".plane1").hide();
          $(".plane2").hide();
          $(".plane3").show();
-         user_id = response.id;
-         user_name = response.name;
+         localStorage.setItem('user_id'    , response.id)
+         localStorage.setItem('user_name'  , response.name)
          setProfile();
          // Send user id to the server
          $.ajax({
            method: "post",
            url: "/user_login",
            data: {
-             user_id : response.id
+             user_id    : response.id,
+             user_name  : response.name
              // get whatever you need
            },
            success: function() {
@@ -56,6 +59,7 @@ window.fbAsyncInit = function() {
           // Login and connect to app
           user_id = response.authResponse.userID;
           accessToken = response.authResponse.accessToken;
+          
           FB.api('/me', function(response) {
             user_name = response.name;
             setProfile();

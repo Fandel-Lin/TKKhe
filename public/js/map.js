@@ -1,3 +1,4 @@
+let localStorage = window.localStorage
 let historicalOverlay
 let userPositionIcon
 let map
@@ -325,6 +326,20 @@ const hintAttraction = () => {
 }
 
 $(document).ready(() => {
+  //check if visited
+  $.ajax({
+    method: "post",
+    url: "./visited",
+    data: {
+      user_id    : localStorage.user_id ,
+      user_name  : localStorage.user_name
+    },
+    success: function(visited) {
+      console.log(visited)
+      if(!visited){console.log('tutor')}
+      //tutor()
+    }
+  })
 
   $('#nearestAttraction').click(()=>{
     map.setCenter(nearestAttraction.position) 
