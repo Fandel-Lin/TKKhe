@@ -159,6 +159,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-color: white;
+        display: hide;
     }
 
     #commenter003{

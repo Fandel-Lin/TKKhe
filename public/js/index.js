@@ -1,6 +1,7 @@
 let localStorage = window.localStorage
 
 $('document').ready(function() {
+  localStorage.setItem("commentShow", false);
   // Chenge planes
   $("#Sign_Up").click(function(){
     $(".plane1").toggle();
