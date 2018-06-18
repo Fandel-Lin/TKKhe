@@ -78,7 +78,6 @@ let setUserVisited = (id, name, bool) => {
       user.visited = bool
     }
   })*/
-  //var messagesRef = new Firebase("https://tkkhe-39445.firebaseio.com/tkkhe-39445/User");
   var itemRef = ref.child("User");
   itemRef.once("value", function(allMessagesSnapshot) {
     allMessagesSnapshot.forEach(function(messageSnapshot) {
@@ -102,31 +101,6 @@ let setUserVisited = (id, name, bool) => {
     });
   });
   console.log("Set user id: "+id);
-  /*var itemRef = ref.child("User");
-  itemRef.orderByChild("id").equalTo(id).on("value", function(snapshot) {
-    if(snapshot.exists()){
-      /*itemRef.child(snapshot.key).remove();
-      var itemsRef = ref.child("User");
-      var newItemRef = snapshot.push();
-      newItemRef.set({
-        "id": id,
-        "name": name,
-        "visited": bool,
-        "Created Time": new Date().toString()
-      });
-      var itemId = newItemRef.key;
-      console.log("A new User with ID " + itemId + " is created.");
-      console.log("Set this user to be "+bool);
-      return true;*/
-      //itemRef.child(snapshot.key).child("visited").setValue(bool);
-	  //console.log(snapshot.key);
-	  //snapshot.ref.child(snapshot.key).update({"visited": bool});
-      /*snapshot.update({
-        "visited": bool
-      });*/
-  /*  }
-    
-  });*/
 }
 
 
@@ -135,16 +109,7 @@ app.post('/user_login', (req, res) => {
 })  
 
 app.post('/visited', (req, res) => {
-  
   console.log("visited?");
-  /*var itemRef = ref.child("User");
-  itemRef.orderByChild("id").equalTo(req.body.user_id).on("value", function(snapshot) {
-    if(snapshot.exists()){
-      res.send(snapshot.key)
-    }
-  });
-  */
-  
   var itemRef = ref.child("User");
   itemRef.once("value", function(allMessagesSnapshot) {
     allMessagesSnapshot.forEach(function(messageSnapshot) {
@@ -158,17 +123,6 @@ app.post('/visited', (req, res) => {
     });
   });
   setUserVisited(req.body.user_id,req.body.user_name, true)
-  
-  /*
-  USER_TABLE.forEach((user)=>{
-    if (user.id === req.body.user_id){
-      res.send(user.visited)
-    }
-  }) 
-  // it should use promise
-  setUserVisited(req.body.user_id, true)
-  */
-  
 })
 
 
