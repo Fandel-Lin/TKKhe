@@ -364,9 +364,19 @@ $(document).ready(() => {
   })
 
   $('.camera').click(inConstruction)
-  $('.heart').click(inConstruction)
   $('.share').click(inConstruction)
   $('#camera').click(inConstruction)
+  
+  $('.heart').click(()=>{
+    if($('#tutor-review').css('display') == 'none'){
+    console.log('aaa')
+      $('#tutor-review').show()
+    }else{
+      $('#tutor-review').hide()
+    }
+  
+  
+  })
   
   $('.edit').click(() => {
     if($('#experience').css('display') == 'none'){
@@ -377,11 +387,26 @@ $(document).ready(() => {
   })
 
   $('#experience .times').click(() => $('#experience').hide())
+  $('#tutor-review .times').click(() => $('#tutor-review').hide())
   $('#info .times').click(() => $('#info').hide())
 
   $(".custButton.light").click(() => $('#experience').hide())
 
-  $(".custButton.dark").click(() => {
+  $("#tutor-send").click(() => {
+    $.ajax({
+      method: "post",
+      url: "./tutor-send",
+      data: {
+        comment: $("#tutor-review textarea").val()
+      },
+      success: function(data) {
+        console.log(data)  
+      }
+    })
+    $("#tutor-review textarea").val('')
+    $('#tutor-review').hide()
+  })  
+  $("#experience-send").click(() => {
     event.preventDefault();//取消reload
     $.ajax({
       method: "post",
