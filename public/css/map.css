@@ -28,6 +28,7 @@
 }
 
 #info{
+  z-index:2;
   position: absolute;
   display: none;
   top: 1vh;
@@ -60,6 +61,7 @@
   padding: 1rem;
 }
 #experience{
+  z-index:2;
   position: absolute;
   display: none;
   top: 20vh;
@@ -150,4 +152,86 @@
   word-wrap:break-word;  
   padding-left: 20px;
   padding-right: 20px;
+}
+#tutor-review{
+  position: absolute;
+  display: none;
+  top: 20vh;
+  left: calc(50% - 45vw);
+  width: 90vw;
+  height: 50vh;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px groove;
+  overflow: hidden;
+  box-shadow: 2px 4px #ddd;
+}
+#tutor-review .times{
+  margin: 1rem !important;
+}
+#tutor-review textarea{
+  margin: auto;
+  margin-top: 2rem;
+  border: 1px groove;
+  width: 80vw;
+}
+#tutor-content > p{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 5rem;
+}
+#guide{
+  //display: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 92vh;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1;
+  color: #fff;
+  font-size: 20px;
+}
+#guide p{
+  display: inline-block;
+  margin: 0;
+}
+#guide i{
+  margin: 0;
+}
+#nearest_guide{
+  position: absolute;
+  margin: 10px;
+  bottom: 0;
+}
+#share_guide{
+  position: absolute;
+  margin: 10px;
+  bottom: 0;
+  right: 0px;
+}
+#f_marker{
+  z-index:2;
+  position: absolute;
+  top: calc(50% - 45px);
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 45px;
+  background: url("http://www.picpng.com/uploads/small/Google_Map_Marker_Red_Peg_77453.Png") no-repeat center center ;
+  background-size: 70px;
+}
+#forum_guide{
+  position: absolute;
+  margin: 10px;
+  top: 50%;
+  left: calc(50% - 100px);
+} 
+#skip{
+  position: absolute;
+  margin: 10px;
+  top: 70%;
+  left: calc(50% - 15px);
+  font-size: 30px;
 }
