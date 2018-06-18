@@ -353,8 +353,7 @@ $(document).ready(() => {
       user_name  : localStorage.user_name
     },
     success: function(visited) {
-      if(!visited){console.log('tutor')}
-      //tutor()
+      if(!visited){$('#guide').show()}
     }
   })
 
@@ -389,8 +388,55 @@ $(document).ready(() => {
   $('#experience .times').click(() => $('#experience').hide())
   $('#tutor-review .times').click(() => $('#tutor-review').hide())
   $('#info .times').click(() => $('#info').hide())
+  $('#skip').click(() => $('#guide').hide())
+  
+  $('#f_marker').click(()=>{
+      attraction = nearestAttraction
+      $('#infoTitle').html('<h1>'+attraction.name+'</h1>')
+      $('#infoImg').css('background', 'url('+ attraction.img +') center center')
+      $('#infoImg').css('background-size', 'cover')
+      $('#infoContent').html('<p>'+attraction.content+'</p>')
+      $('#info').show()
+      $.ajax({
+        method: "post",
+        url: "./get_comment",
+        data: {
+          attraction_name: attraction.name
+        },
+        success: function(contents) {
+          contents.forEach((content) => {
+            $('#infoContent').append(
+              '<div class="commentContainer">'+
+                '<p class = "userName">'+content.userName+'</p>'+
+                '<p class = "comment">'+content.comment+'</p>'+
+              '</div>'
+            )
+          })
+          console.log(contents)  
+        }
+      })
+    })
 
+  $("#star1").click(() => $( "#star1" ).removeClass( "outline" ))
+  $("#star2").click(() => {
+    $( "#star1" ).removeClass( "outline" )
+    $( "#star2" ).removeClass( "outline" )
+  })
+  $("#star3").click(() => {
+    $( "#star1" ).removeClass( "outline" )
+    $( "#star2" ).removeClass( "outline" )
+    $( "#star3" ).removeClass( "outline" )
+  })
+  $("#star4").click(() => {
+    $( "#star1" ).removeClass( "outline" )
+    $( "#star2" ).removeClass( "outline" )
+    $( "#star3" ).removeClass( "outline" )
+    $( "#star4" ).removeClass( "outline" )
+  })
+  $("#star5").click(() => $( ".star" ).removeClass( "outline" ))
+  
   $(".custButton.light").click(() => $('#experience').hide())
+  $(".custButton.light").click(() => $('#tutor-review').hide())
 
   $("#tutor-send").click(() => {
     $.ajax({

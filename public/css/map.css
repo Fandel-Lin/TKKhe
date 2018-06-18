@@ -3,6 +3,11 @@
 #map {
   height: 92vh;
 }
+.bar1{
+  height: 8vh;
+  font-size: 25px;
+  padding:14px;
+}
 .bar{
   height: 8vh;
   background-color: #663300;
@@ -16,6 +21,10 @@
 .bar  div{
   display: inline-block;
   height: 33.5px;
+}
+.bar1  .icon{
+  display: inline-block;
+  color: #fff;
 }
 .bar  .icon{
   display: inline-block;
@@ -116,7 +125,7 @@
   background-color: #d3c092;
 }
 .custButton.dark{
-  margin-left: 11rem;
+  margin-left: calc(75% - 100px);)
 }
 .custButton p{
   margin-top: 0.4rem;
@@ -160,20 +169,37 @@
   left: calc(50% - 45vw);
   width: 90vw;
   height: 50vh;
-  background-color: #fff;
+  background-color: #a37b51;
   border-radius: 10px;
   border: 1px groove;
   overflow: hidden;
   box-shadow: 2px 4px #ddd;
+  text-align:center;
 }
 #tutor-review .times{
   margin: 1rem !important;
 }
 #tutor-review textarea{
+  background-color:#fff;
   margin: auto;
-  margin-top: 2rem;
-  border: 1px groove;
+  margin-top: 1rem;
+  border: 1px solid #fff;
   width: 80vw;
+}
+#tutor-review h1{
+  font-size: 25px;
+  color: #fff;
+  margin: 12px;
+}
+#tutor-review p{
+  font-size: 20px;
+  margin: auto;
+  color: #fff;
+}
+#tutor-review .star{
+  font-size: 20px;
+  margin: 8px;
+  color: yellow;
 }
 #tutor-content > p{
   text-align: center;
@@ -181,7 +207,7 @@
   margin-top: 5rem;
 }
 #guide{
-  //display: none;
+  display: none;
   margin: 0;
   padding: 0;
   position: absolute;
