@@ -141,11 +141,20 @@ function initMap () {
     '../images/ttk_map1.png',
     imageBounds);
   historicalOverlay.setMap(map)
-
-  //set attractions
-  let icons = {
-    monuments: '../images/bank.png'
+  
+  //historicalOverlay
+  let riverBounds = {
+    north: 23.00000,
+    south: 22.98990,
+    east: 120.21655,
+    west: 120.19935
   }
+
+  riverOverlay = new google.maps.GroundOverlay(
+    '../images/map02-01.png',
+    riverBounds);
+  riverOverlay.setMap(map)
+
   
   //create attractions
   attractions.forEach((attraction) =>  {
@@ -203,15 +212,21 @@ function initMap () {
   var overLayControlDiv = document.createElement('div')
   var centerControlDiv = document.createElement('div')
 
-  let tutorTitle = 'Click to start tutorial'
+  let tutorTitle = 'Click to set river'
   let overLayTitle = 'Click to swtich the map'
   let centerTitle =  'Click to recenter the map'
 
-  let tutorIcon = '"volume up icon"'
+  let tutorIcon = '"anchor icon"'
   let overLayIcon = '"map icon"'
   let centerIcon = '"crosshairs icon"'
 
-  let tutorFunc = () => console.log('aaa')
+  let tutorFunc = () =>{ 
+    if(riverOverlay.map){
+      riverOverlay.setMap(null)
+    }else{
+      riverOverlay.setMap(map)
+    }
+  }
   let overLayFunc = () => {
     if(historicalOverlay.map){
       historicalOverlay.setMap(null)
@@ -259,25 +274,6 @@ function initMap () {
 
 }
 
-
-let getCamera = () => {
-  navigator.mediaDevices.getUserMedia({video: true})
-  .then(gotMedia)
-  .catch(error => console.error('getUserMedia() error:', error));
-}
-
-let gotMedia = (mediaStream) => {
-  const mediaStreamTrack = mediaStream.getVideoTracks()[0];
-  const imageCapture = new ImageCapture(mediaStreamTrack);
-  const img = document.querySelector('img');
-  
-  imageCapture.takePhoto()
-  .then(blob => {
-    img.src = URL.createObjectURL(blob);
-    img.onload = () => { URL.revokeObjectURL(this.src); }
-  })
-  .catch(error => console.error('takePhoto() error:', error))
-}
 
 let getGeolocation = () => {
   return new Promise((resolve) =>{
