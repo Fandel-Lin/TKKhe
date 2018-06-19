@@ -6,7 +6,7 @@ $( document ).ready(function() {
         
     });
     
-    $("#guide001").click(function(){
+    $("#guide001_container").click(function(){
         
         $("#guide_information").css("display","inline");
         $("#guide_table_section").css("display","none");
