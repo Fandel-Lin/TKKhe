@@ -21,8 +21,6 @@ $('document').ready(function() {
          $(".plane1").hide();
          $(".plane2").hide();
          $(".plane3").show();
-         localStorage.setItem('user_id'    , response.id)
-         localStorage.setItem('user_name'  , response.name)
          setProfile();
          // Send user id to the server
          $.ajax({
@@ -58,9 +56,11 @@ window.fbAsyncInit = function() {
       if (response.status === 'connected') {
           // Login and connect to app
           user_id = response.authResponse.userID;
+          localStorage.setItem('user_id', user_id)
           accessToken = response.authResponse.accessToken;
           
           FB.api('/me', function(response) {
+            localStorage.setItem('user_name', response.name)
             user_name = response.name;
             setProfile();
           })
