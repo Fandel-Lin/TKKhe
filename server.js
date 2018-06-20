@@ -88,7 +88,6 @@ let initUser = (user_id ,user_name) => {
   console.log("A new User with ID " + itemId + " is created.");  
 }
 
-<<<<<<< Updated upstream
 let foundUser = (id, name) => {
   var existed=false;
   console.log("Start to find user id: "+id);
