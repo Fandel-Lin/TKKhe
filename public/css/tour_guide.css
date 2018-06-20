@@ -16,35 +16,39 @@
     }
 /*guide image tr*/
     #guide001{
-        background-image: url(../../template/images/profile/profile_5.png);
+        background-image: url(../images/profile/profile_5.png);
         width: 30%;
         height: 30%;
         background-size: contain;
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     #guide002{
-        background-image: url(../../template/images/profile/profile_6.png);
+        background-image: url(../images/profile/profile_6.png);
         width: 30%;
         height: 30%;
         background-size: contain;
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     #guide003{
-        background-image: url(../../template/images/profile/profile_1.png);
+        background-image: url(../images/profile/profile_1.png);
         width: 30%;
         height: 30%;
         background-size: contain;
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     #guide004{
-        background-image: url(../../template/images/profile/profile_2.png);
+        background-image: url(../images/profile/profile_2.png);
         width: 30%;
         height: 30%;
         background-size: contain;
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     
