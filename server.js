@@ -151,6 +151,7 @@ app.post('/visited', (req, res) => {
       var usid = messageSnapshot.child("id").val();
       if(usid==req.body.user_id){
         res.send(key)
+        return true // should use promise / take care of duplicated sign up
       }
     });
   });
