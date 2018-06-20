@@ -12,9 +12,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://tkkhe-39445.firebaseio.com'
 });
-// [END initialize]
  
-// Get a database reference to the TODO list database
 var db = admin.database();
 var ref = db.ref("/");
 
@@ -45,9 +43,6 @@ let FORUM_TABLE = [
       },{
         userName   : '羅一中',
         comment: '阿怎麼兩個一中?各自表述?'
-      },{
-        userName   : '羅一中',
-        comment: '阿怎麼兩個一中asdasdasduiloghodcvuojhldsjkalkjfasdlfjlaskjdfhlasuidhflasjdfhauisdfjkalsdfasdfajksdlfkaujshdfalkjsdfakmnsdlkfbnasu8ejkla,kjsdnvcauiweblfkjsabndlavewuibakjsdluiebnjknewuibliublcbkjbkjbslkjdnmnflu3hjwleb.j cm,nsdmlkjhlieubnmnc,kmnb,zxmnb,cidkj.,kjas,dbmnb,caiksbmdnbjhb,izbxjbvmn,zb,xkjdbvxnbcmnzxdujkibvzxkdmn,vnbds?各自表述?'
       }
 
     ]

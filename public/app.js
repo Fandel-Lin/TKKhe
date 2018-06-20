@@ -11,7 +11,6 @@ $(() => {
   }
   
   const fetchData = () => {
-    })
   }
 
   fetchData()

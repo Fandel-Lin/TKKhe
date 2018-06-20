@@ -349,7 +349,7 @@ $(document).ready(() => {
       user_name  : localStorage.user_name
     },
     success: function(visited) {
-      if(!visited){$('#guide').show()}
+      $('#guide').show()
     }
   })
 
