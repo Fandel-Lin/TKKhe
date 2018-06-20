@@ -90,14 +90,14 @@ let initUser = (user_id ,user_name) => {
 
 let foundUser = (id, name) => {
   var existed=false;
-  console.log("Start to find user id: "+id);
+  //console.log("Start to find user id: "+id);
   var itemRef = ref.child("User");
   itemRef.orderByChild("id").equalTo(id).on("value", function(snapshot) {
     if(snapshot.exists()){
-      console.log("This id already exists in database!");
+      //console.log("This id already exists in database!");
     }
     else{
-      console.log("This id is not found in database...");
+      //console.log("This id is not found in database...");
       initUser(id ,name)
     }
   });
@@ -114,7 +114,7 @@ let setUserVisited = (id, name, bool) => {
   itemRef.once("value", function(allMessagesSnapshot) {
     allMessagesSnapshot.forEach(function(messageSnapshot) {
       // Will be called with a messageSnapshot for each child under the /User/ node
-	  console.log(messageSnapshot.key);
+	  //console.log(messageSnapshot.key);
       var key = messageSnapshot.key;
       var usid = messageSnapshot.child("id").val();
       var usname = messageSnapshot.child("name").val();
@@ -132,7 +132,7 @@ let setUserVisited = (id, name, bool) => {
       }
     });
   });
-  console.log("Set user id: "+id);
+  //console.log("Set user id: "+id);
 }
 
 
@@ -141,12 +141,12 @@ app.post('/user_login', (req, res) => {
 })  
 
 app.post('/visited', (req, res) => {
-  console.log("visited?");
+  //console.log("visited?");
   var itemRef = ref.child("User");
   itemRef.once("value", function(allMessagesSnapshot) {
     allMessagesSnapshot.forEach(function(messageSnapshot) {
       // Will be called with a messageSnapshot for each child under the /User/ node
-	  console.log(messageSnapshot.key);
+	  //console.log(messageSnapshot.key);
       var key = messageSnapshot.key;
       var usid = messageSnapshot.child("id").val();
       if(usid==req.body.user_id){
