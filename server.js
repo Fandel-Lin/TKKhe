@@ -197,6 +197,9 @@ app.post('/get_tour', (req, res) => {
   }
 })  
 
+app.get('/data', (req, res) => {
+  res.send("fetched")
+})
 
 https.createServer(options, app)
 .listen(config.port, () => console.log(`listen on port:${config.port}`))

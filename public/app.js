@@ -11,6 +11,9 @@ $(() => {
   }
   
   const fetchData = () => {
+    $.get('./data', res => {
+      console.log(res) 
+    })
   }
 
   fetchData()
