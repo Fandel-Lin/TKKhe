@@ -148,7 +148,7 @@
 /*commenter image tr*/
 
     #commenter001{
-        background-image: url(../../template/images/profile/profile_7.png);
+        background-image: url(../images/profile/profile_7.png);
         width: 20%;
         height: 20%;
         background-size: contain;
@@ -157,7 +157,7 @@
     }
 
     #commenter002{
-        background-image: url(../../template/images/profile/profile_4.png);
+        background-image: url(../images/profile/profile_4.png);
         width: 20%;
         height: 20%;
         background-size: contain;
@@ -167,7 +167,7 @@
     }
 
     #commenter003{
-        background-image: url(../../template/images/profile/profile_1.png);
+        background-image: url(../images/profile/profile_1.png);
         width: 20%;
         height: 20%;
         background-size: contain;
@@ -176,7 +176,7 @@
     }
 
     #commenter004{
-        background-image: url(../../template/images/profile/profile_2.png);
+        background-image: url(../images/profile/profile_2.png);
         width: 20%;
         height: 20%;
         background-size: contain;
@@ -360,7 +360,7 @@
     }
 
     #guide_information_guide{
-        background-image: url(../../template/images/profile/profile_5.png);
+        background-image: url(../images/profile/profile_5.png);
         background-size: contain;
         background-repeat: no-repeat;
         padding-left: 32%;
