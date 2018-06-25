@@ -1,5 +1,14 @@
 var user_id, user_name, accessToken;
 
+// Load the SDK asynchronously
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 // Facebook SDK setup
 window.fbAsyncInit = function() {
   FB.init({
@@ -10,6 +19,7 @@ window.fbAsyncInit = function() {
   });
 
   FB.getLoginStatus(function(response) {
+
       if (response.status === 'connected') {
           // Login and connect to app
           user_id = response.authResponse.userID;
@@ -17,10 +27,11 @@ window.fbAsyncInit = function() {
           FB.api('/me', function(response) {
             user_name = response.name;
             console.log('FB login success. Good to see you, ' + user_name + '.');
+            setProfile();
           })
 
       } else if (response.status === 'not_authorized') {
-          console.log("Still not authorized in facebook, please authorizing first.");
+          console.log("Login but not connect, please authorizing first.");
 
       } else {
           console.log("Still not login in facebook, please loging first.");
@@ -29,14 +40,20 @@ window.fbAsyncInit = function() {
   });
 }
 
-// Load the SDK asynchronously
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+// Set profile images
+function setProfile(){
+  FB.api(
+    '/me/picture?redirect=false&type=normal',
+    function(response) {
+      $("#profile_image").attr("src", response.data.url)
+      $("#profile_image").css({
+        "width": "40%",
+        "border-radius": "8px",
+        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+      })
+      $("#user_name").text(user_name)
+  })
+}
 
 // Post message on Facebook, this function was no longer supportted.
 function postToWall(image, cap, des, msg) {
