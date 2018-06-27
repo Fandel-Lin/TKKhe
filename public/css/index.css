@@ -21,3 +21,12 @@
   border-radius: 20px;
   display: none;
 }
+
+.button_panel {
+  font-size: 120%;
+  width: 90%;
+  margin: 8% auto;
+  padding: 6% 0;
+  background-color: #B26950;
+  border-radius: 20px;
+}
